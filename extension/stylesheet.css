@@ -4,3 +4,6 @@
 .copymind-mini-button { padding: 4px 8px; border-radius: 8px; }
 .copymind-mini-button:hover { background-color: rgba(140,140,140,0.22); }
 .copymind-footer { spacing: 8px; }
+.copymind-scroll { max-height: 480px; min-width: 390px; }
+.copymind-image-box { spacing: 5px; padding: 5px; }
+.copymind-image-preview { width: 200px; height: 100px; }

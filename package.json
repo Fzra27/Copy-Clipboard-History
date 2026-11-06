@@ -1,0 +1,8 @@
+{
+  "name": "copymind",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/history.test.js && node tests/clipboard.test.js"
+  }
+}

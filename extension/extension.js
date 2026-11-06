@@ -1,5 +1,6 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import St from 'gi://St';
 // GNOME Shell 46: byteArray is a legacy GJS module, not a resource:// ESM import.
@@ -21,9 +22,10 @@ function preview(text, max = 78) {
     return s.length > max ? s.slice(0, max - 1) + '…' : s;
 }
 
+const CopyMindIndicator = GObject.registerClass(
 class CopyMindIndicator extends PanelMenu.Button {
-    constructor() {
-        super(0.0, 'CopyMind Clipboard History');
+    _init() {
+        super._init(0.0, 'CopyMind Clipboard History');
         this._alive = true;
         this._paused = false;
         this._entries = [];
@@ -221,7 +223,7 @@ class CopyMindIndicator extends PanelMenu.Button {
         this._rows = [];
         super.destroy();
     }
-}
+});
 
 export default class CopyMindExtension extends Extension {
     enable() {

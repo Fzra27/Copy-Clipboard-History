@@ -181,7 +181,7 @@ class CopyMindIndicator extends PanelMenu.Button {
             const empty = new PopupMenu.PopupMenuItem(
                 query ? 'No matching entries' : 'Copy text to begin collecting history',
                 {reactive: false});
-            this.menu.addMenuItem(empty, this.menu.numMenuItems - 1);
+            this.menu.addMenuItem(empty, 3);
             this._rows.push(empty);
             return;
         }
@@ -209,7 +209,7 @@ class CopyMindIndicator extends PanelMenu.Button {
                 this._refresh();
             }, 'Delete entry'));
             row.add_child(content);
-            this.menu.addMenuItem(row, this.menu.numMenuItems - 1);
+            this.menu.addMenuItem(row, 3 + this._rows.length);
             this._rows.push(row);
         }
     }

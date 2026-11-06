@@ -1,0 +1,13 @@
+{
+  "uuid": "copymind@fzra27",
+  "name": "CopyMind Clipboard History",
+  "description": "Local clipboard history, search, pin and privacy controls for GNOME/Wayland.",
+  "shell-version": [
+    "46",
+    "47",
+    "48",
+    "49",
+    "50"
+  ],
+  "version": 1
+}

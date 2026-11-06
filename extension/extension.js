@@ -3,7 +3,6 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import St from 'gi://St';
-// GNOME Shell 46: byteArray is a legacy GJS module, not a resource:// ESM import.
 
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -70,7 +69,7 @@ class CopyMindIndicator extends PanelMenu.Button {
             const [ok, data] = GLib.file_get_contents(HISTORY_PATH);
             if (!ok)
                 return;
-            const json = JSON.parse(imports.byteArray.toString(data));
+            const json = JSON.parse(new TextDecoder().decode(data));
             if (Array.isArray(json)) {
                 this._entries = json.filter(item => item &&
                     typeof item.text === 'string' && item.text.length > 0 &&
@@ -88,8 +87,10 @@ class CopyMindIndicator extends PanelMenu.Button {
             GLib.mkdir_with_parents(DIR, 0o700);
             const contents = JSON.stringify(this._entries);
             GLib.file_set_contents(HISTORY_PATH, contents);
-            GLib.chmod(DIR, 0o700);
-            GLib.chmod(HISTORY_PATH, 0o600);
+            Gio.File.new_for_path(DIR).set_attribute_uint32(
+                'unix::mode', 0o700, Gio.FileQueryInfoFlags.NONE, null);
+            Gio.File.new_for_path(HISTORY_PATH).set_attribute_uint32(
+                'unix::mode', 0o600, Gio.FileQueryInfoFlags.NONE, null);
         } catch (e) {
             logError(e, 'CopyMind: could not save clipboard history');
         }
@@ -143,8 +144,7 @@ class CopyMindIndicator extends PanelMenu.Button {
             reactive: true,
             track_hover: true,
         });
-        if (tooltip)
-            button.set_tooltip_text(tooltip);
+        // St.Button is not a GTK widget; unsupported tooltip methods are avoided.
         button.connect('clicked', click);
         return button;
     }

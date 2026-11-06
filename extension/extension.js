@@ -2,7 +2,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Meta from 'gi://Meta';
 import St from 'gi://St';
-import ByteArray from 'resource:///org/gnome/gjs/modules/byteArray.js';
+// GNOME Shell 46: byteArray is a legacy GJS module, not a resource:// ESM import.
 
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -68,7 +68,7 @@ class CopyMindIndicator extends PanelMenu.Button {
             const [ok, data] = GLib.file_get_contents(HISTORY_PATH);
             if (!ok)
                 return;
-            const json = JSON.parse(ByteArray.toString(data));
+            const json = JSON.parse(imports.byteArray.toString(data));
             if (Array.isArray(json)) {
                 this._entries = json.filter(item => item &&
                     typeof item.text === 'string' && item.text.length > 0 &&

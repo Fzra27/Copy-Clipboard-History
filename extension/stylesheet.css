@@ -1,0 +1,6 @@
+.copymind-menu { min-width: 390px; }
+.copymind-row { spacing: 8px; padding: 5px 2px; }
+.copymind-preview { max-width: 250px; }
+.copymind-mini-button { padding: 4px 8px; border-radius: 8px; }
+.copymind-mini-button:hover { background-color: rgba(140,140,140,0.22); }
+.copymind-footer { spacing: 8px; }
